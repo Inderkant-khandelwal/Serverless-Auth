@@ -1,0 +1,15 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `save_user`(IN user_name varchar(30), IN user_email varchar(30) , IN user_mobile Numeric(10) , IN user_city varchar(15), IN user_country Varchar(40), IN user_password Varchar(100), IN user_u_id varchar(200))
+BEGIN
+ IF (select count(*) from auth.user_registeration where user_registeration.user_email = user_email OR user_registeration.user_mobile = user_mobile  ) > 0 THEN
+ 
+   SIGNAL SQLSTATE '45000'
+     SET message_text = "Already Registered";
+   
+ ELSE  
+   
+    insert into user_registeration(user_name , user_email, user_mobile , user_city , user_country,user_password , user_unique_key) values(user_name , user_email , user_mobile , user_city , user_country,user_password , user_u_id);
+
+  END IF;
+   
+
+END

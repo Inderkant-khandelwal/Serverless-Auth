@@ -1,0 +1,4 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `login_user`(IN username varchar(100))
+BEGIN
+  select  * from auth.user_registeration where auth.user_registeration.user_email = username OR auth.user_registeration.user_mobile = username;
+END

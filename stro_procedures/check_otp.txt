@@ -1,0 +1,15 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `check_otp`(IN email varchar(100) , IN otpUser varchar(10) , IN vrf varchar(50) , IN fld varchar(50))
+BEGIN
+ IF (select user_registeration.user_id from auth.user_registeration where user_registeration.user_otp = otpUser AND user_registeration.user_email = email) > 0 THEN
+   update auth.user_registeration set user_registeration.user_verified_status = vrf where user_registeration.user_email = email;
+   select user_registeration.user_unique_key from auth.user_registeration where user_registeration.user_otp = otpUser;
+ 
+ ELSE
+ update auth.user_registeration set user_registeration.user_verified_status = fld where user_registeration.user_email = email;
+
+ SIGNAL SQLSTATE '45000'
+  SET message_text = "OTP NOT VARIFIED";
+ END IF;
+  
+ 
+END

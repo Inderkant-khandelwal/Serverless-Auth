@@ -1,0 +1,5 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `save_otp`(IN otp Varchar(50) , IN u_email Varchar(50) , IN status_s varchar(50))
+BEGIN
+ update auth.user_registeration set user_registeration.user_otp = otp , user_registeration.user_verified_status = status_s  where user_registeration.user_email = u_email;
+ 
+END

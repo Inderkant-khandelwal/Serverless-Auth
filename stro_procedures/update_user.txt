@@ -1,0 +1,20 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_user`(IN userId varchar(300), IN userMobile varchar(20),  IN userCity varchar(50), IN userCountry varchar(50))
+BEGIN
+
+IF(select count(*) from auth.user_registeration where user_registeration.user_unique_key = userId) > 0 THEN
+  
+IF(userMobile is Not Null && userMobile != "" && userMobile != "undefined") THEN
+ update auth.user_registeration SET user_registeration.user_mobile = userMobile where user_registeration.user_unique_key = userId; 
+end if;
+
+IF(userCity is Not Null && userCity != "" && userCity != "undefined") THEN
+ update auth.user_registeration SET user_registeration.user_city = userCity where user_registeration.user_unique_key = userId; 
+end if;
+
+IF(userCountry is Not Null && userCountry != "" && userCountry != "undefined") THEN
+ update auth.user_registeration SET user_registeration.user_country = userCountry  where user_registeration.user_unique_key = userId; 
+end if;
+
+
+end if;
+END
