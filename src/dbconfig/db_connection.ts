@@ -36,7 +36,7 @@ const connection = async ()=>{
         
     }catch(e){
         // here we are throw the error in case something did not happen according to our need
-        throw e;
+        console.log(e);
     }
  
 }
